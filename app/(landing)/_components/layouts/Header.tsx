@@ -7,7 +7,7 @@ const Header = () => {
     <header>
       <div className="flex absolute top-0 right-0 left-0 justify-between items-center gap-10 container mx-auto py-4">
         <Image
-          src="images/logo.svg"
+          src="/images/logo.svg"
           alt="logo"
           width={127}
           height={30}
