@@ -7,9 +7,10 @@ import CardPopup from "../ui/CardPopup";
 
 const Header = () => {
   const [isCardPopupOpen, setIsCardPopupOpen] = useState(false);
+
   return (
     <header>
-      <div className="flex absolute top-0 right-0 left-0 justify-between items-center gap-10 container mx-auto py-4">
+      <div className="flex justify-between items-center gap-10 container mx-auto py-3">
         <Image
           src="/images/logo.svg"
           alt="logo"
@@ -29,14 +30,16 @@ const Header = () => {
           <Link href="#explore-product">Explore Product</Link>
         </nav>
 
-        <div className="flex gap-12">
-          <FiSearch size={24} className="cursor-pointer" />
+        <div className="relative flex items-center gap-6 z-10">
+          <div className="hover:bg-primary/9 p-2 rounded-full cursor-pointer">
+            <FiSearch size={24} />
+          </div>
           <button
-            className="relative"
+            className="relative cursor-pointer hover:bg-primary/9 p-2 rounded-full"
             onClick={() => setIsCardPopupOpen(!isCardPopupOpen)}
           >
-            <FiShoppingBag size={24} className="cursor-pointer" />
-            <div className="absolute -top-1 -right-1 rounded-full w-3.5 h-3.5 bg-primary text-[10px] text-white text-center">
+            <FiShoppingBag size={24} />
+            <div className="absolute top-1 right-1 rounded-full w-3.5 h-3.5 bg-primary text-[10px] text-white text-center">
               3
             </div>
           </button>
