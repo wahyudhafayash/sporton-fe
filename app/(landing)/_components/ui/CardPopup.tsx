@@ -34,12 +34,12 @@ const CardPopup = () => {
   );
 
   return (
-    <div className="absolute bg-white right-0 top-12 shadow-xl shadow-black/10 border border-gray-200 w-90">
+    <div className="absolute bg-white right-0 top-12 shadow-xl shadow-black/10 border border-gray-200 w-90 z-10">
       <div className="p-2.5 border-b border-gray-200 font-bold text-center">
         Shopping Card
       </div>
       {cardList.map((item, i) => (
-        <div className="border-b border-gray-200 p-4 flex gap-3">
+        <div className="border-b border-gray-200 p-4 flex gap-3" key={i}>
           <div className="bg-primary-light aspect-square w-16 flex justify-center items-center">
             <Image
               src={`/images/products/${item.imgUrl}`}
