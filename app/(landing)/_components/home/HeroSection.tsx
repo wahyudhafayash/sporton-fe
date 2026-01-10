@@ -4,14 +4,17 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <section id="hero-section" className="container mx-auto min-h-screen flex">
+    <section
+      id="hero-section"
+      className="container mx-auto min-h-[90vh] flex mb-10"
+    >
       <div className="relative self-center">
         <Image
           src="/images/img-basketball.png"
           alt="basketball"
           width={432}
           height={423}
-          className="absolute -top-15 left-0 grayscale pointer-events-none"
+          className="absolute -top-5 -left-10 grayscale pointer-events-none"
         />
 
         <div className="relative ml-26 w-full mt-10">
