@@ -1,10 +1,18 @@
+"use client";
 import priceformatter from "@/app/utils/price-formatter";
 import CardWithHeader from "../ui/CardWithHeader";
 import FileUpload from "../ui/FileUpload";
 import Button from "../ui/Button";
 import { FiCheckCircle } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 const PaymentSteps = () => {
+  const router = useRouter();
+
+  const UploadAndConfirm = () => {
+    router.push("/order-status/submitted");
+  };
+
   return (
     <CardWithHeader title="Payment Steps">
       <div className="p-5">
@@ -36,6 +44,7 @@ const PaymentSteps = () => {
           variant="dark"
           size="small"
           className="w-full mt-4 flex items-center justify-center gap-2"
+          onClick={UploadAndConfirm}
         >
           <FiCheckCircle />
           Upload Receipt & Confirm

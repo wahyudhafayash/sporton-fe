@@ -2,6 +2,7 @@ import priceformatter from "@/app/utils/price-formatter";
 import Image from "next/image";
 import Button from "./Button";
 import { FiArrowRight, FiTrash2 } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 const cardList = [
   {
@@ -28,6 +29,8 @@ const cardList = [
 ];
 
 const CardPopup = () => {
+  const router = useRouter();
+
   const totalPrice = cardList.reduce(
     (total, item) => total + item.price * item.qty,
     0
@@ -68,7 +71,12 @@ const CardPopup = () => {
             {priceformatter(totalPrice)}
           </div>
         </div>
-        <Button variant="dark" size="small" className="w-full mt-4">
+        <Button
+          variant="dark"
+          size="small"
+          className="w-full mt-4"
+          onClick={() => router.push("/checkout")}
+        >
           Checkout Now
           <FiArrowRight />
         </Button>

@@ -65,7 +65,7 @@ const ProductSection = () => {
       <div className="grid grid-cols-4 gap-5 mt-11">
         {productList.map((product, i) => (
           <Link
-            href="#"
+            href={`/product/${product.name}`}
             key={i}
             className="p-1.5 bg-white hover:shadow-xl rounded-xl duration-300"
           >
