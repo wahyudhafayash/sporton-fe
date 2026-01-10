@@ -2,6 +2,7 @@ import priceformatter from "@/app/utils/price-formatter";
 import Image from "next/image";
 import { FiArrowRight, FiTrash2 } from "react-icons/fi";
 import Button from "../ui/Button";
+import CardWithHeader from "../ui/CardWithHeader";
 
 const cardList = [
   {
@@ -20,11 +21,7 @@ const CartItems = () => {
   );
 
   return (
-    <div className="bg-white flex flex-col h-full">
-      <div className="px-5 py-4 border-b border-gray-200">
-        <h2 className="font-bold text-lg">Cart Items</h2>
-      </div>
-
+    <CardWithHeader title="Cart Items">
       <div className="flex-1 overflow-auto max-h-67.5">
         {cardList.map((item, i) => (
           <div key={i} className="border-b border-gray-200 p-4 flex gap-3">
@@ -73,7 +70,7 @@ const CartItems = () => {
           <FiArrowRight />
         </Button>
       </div>
-    </div>
+    </CardWithHeader>
   );
 };
 
