@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../ui/Button";
 import {
   FiArrowRight,
@@ -8,25 +8,12 @@ import {
   FiShoppingBag,
 } from "react-icons/fi";
 import { useRouter } from "next/navigation";
-import { Product } from "@/app/types";
-import { useCartStore } from "@/app/hooks/use-cart-store";
 
-type TProductActionProps = {
-  product: Product;
-  stock: number;
-};
-
-const ProductAction = ({ product, stock }: TProductActionProps) => {
-  const { addItem } = useCartStore();
+const ProductAction = () => {
   const router = useRouter();
   const [qty, setQty] = useState(1);
 
-  const handleAddToCart = () => {
-    addItem(product, qty);
-  };
-
-  const incrementQty = () =>
-    setQty((prevQty) => (prevQty < stock ? prevQty + 1 : prevQty));
+  const incrementQty = () => setQty((prevQty) => prevQty + 1);
   const decrementQty = () =>
     setQty((prevQty) => (prevQty > 1 ? prevQty - 1 : prevQty));
 
@@ -51,7 +38,7 @@ const ProductAction = ({ product, stock }: TProductActionProps) => {
           </button>
         </div>
       </div>
-      <Button className="px-20 w-full" onClick={handleAddToCart}>
+      <Button className="px-20 w-full">
         <FiShoppingBag size={24} />
         Add to Cart
       </Button>
