@@ -3,7 +3,7 @@ import PaymentSteps from "../_components/payment/PaymentSteps";
 
 const Payment = () => {
   return (
-    <main className="bg-gray-100 min-h-[80vh] pt-10">
+    <main className="bg-gray-100 min-h-[90vh] ">
       <div className="max-w-5xl mx-auto py-16">
         <h1 className="text-5xl font-bold text-center mb-11">Payment</h1>
         <div className="grid grid-cols-2 gap-14">
