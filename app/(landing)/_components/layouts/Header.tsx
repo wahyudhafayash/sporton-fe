@@ -3,21 +3,25 @@ import { useState } from "react";
 import { FiSearch, FiShoppingBag } from "react-icons/fi";
 import Image from "next/image";
 import Link from "next/link";
-import CardPopup from "../ui/CardPopup";
+import CardPopup from "../ui/CartPopup";
+import { useCartStore } from "@/app/hooks/use-cart-store";
 
 const Header = () => {
+  const { items } = useCartStore();
   const [isCardPopupOpen, setIsCardPopupOpen] = useState(false);
 
   return (
-    <header>
+    <header className="fixed w-full z-20 bg-white/80 backdrop-blur-xl">
       <div className="flex justify-between items-center gap-10 container mx-auto py-3">
-        <Image
-          src="/images/logo.svg"
-          alt="logo"
-          width={127}
-          height={30}
-          className="pointer-events-none"
-        />
+        <Link href="/">
+          <Image
+            src="/images/logo.svg"
+            alt="logo"
+            width={127}
+            height={30}
+            className="pointer-events-none"
+          />
+        </Link>
 
         <nav className="flex gap-22.75 font-medium">
           <Link
@@ -39,9 +43,13 @@ const Header = () => {
             onClick={() => setIsCardPopupOpen(!isCardPopupOpen)}
           >
             <FiShoppingBag size={24} />
-            <div className="absolute top-1 right-1 rounded-full w-3.5 h-3.5 bg-primary text-[10px] text-white text-center">
-              3
-            </div>
+            {items.length ? (
+              <div className="absolute top-1 right-1 rounded-full w-3.5 h-3.5 bg-primary text-[10px] text-white text-center">
+                {items.length}
+              </div>
+            ) : (
+              <></>
+            )}
           </button>
           {isCardPopupOpen && <CardPopup />}
         </div>
