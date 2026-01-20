@@ -20,7 +20,7 @@ const ProductSection = ({ products }: TProductsProps) => {
       <div className="grid grid-cols-4 gap-5 mt-11">
         {products.map((product) => (
           <Link
-            href={`/product/${product.name}`}
+            href={`/product/${product._id}`}
             key={product._id}
             className="p-1.5 bg-white hover:shadow-xl rounded-xl duration-300"
           >

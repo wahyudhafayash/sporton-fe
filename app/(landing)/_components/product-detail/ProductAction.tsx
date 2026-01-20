@@ -9,11 +9,16 @@ import {
 } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 
-const ProductAction = () => {
+type TProductActionProps = {
+  stock: number;
+};
+
+const ProductAction = ({ stock }: TProductActionProps) => {
   const router = useRouter();
   const [qty, setQty] = useState(1);
 
-  const incrementQty = () => setQty((prevQty) => prevQty + 1);
+  const incrementQty = () =>
+    setQty((prevQty) => (prevQty < stock ? prevQty + 1 : prevQty));
   const decrementQty = () =>
     setQty((prevQty) => (prevQty > 1 ? prevQty - 1 : prevQty));
 
