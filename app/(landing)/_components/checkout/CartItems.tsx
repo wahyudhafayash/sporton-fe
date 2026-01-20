@@ -5,33 +5,33 @@ import { FiCreditCard, FiTrash2 } from "react-icons/fi";
 import Button from "../ui/Button";
 import CardWithHeader from "../ui/CardWithHeader";
 import { useRouter } from "next/navigation";
-import { useCartStore } from "@/app/hooks/use-cart-store";
-import { getImageUrl } from "@/app/lib/api";
 
-type TCartItems = {
-  handlePayment: () => void;
-};
+const cardList = [
+  {
+    name: "SportsOn Slowlivin",
+    category: "Badminton",
+    price: 119000,
+    qty: 2,
+    imgUrl: "product-1.png",
+  },
+];
 
-const CartItems = ({ handlePayment }: TCartItems) => {
+const CartItems = () => {
   const router = useRouter();
-  const { items, removeItem } = useCartStore();
 
-  const totalPrice = items.reduce(
+  const totalPrice = cardList.reduce(
     (total, item) => total + item.price * item.qty,
-    0,
+    0
   );
 
   return (
     <CardWithHeader title="Cart Items">
       <div className="flex-1 overflow-auto max-h-67.5">
-        {items.map((item) => (
-          <div
-            key={item._id}
-            className="border-b border-gray-200 p-4 flex gap-3"
-          >
+        {cardList.map((item, i) => (
+          <div key={i} className="border-b border-gray-200 p-4 flex gap-3">
             <div className="bg-primary-light aspect-square w-16 flex justify-center items-center">
               <Image
-                src={getImageUrl(item.imageUrl)}
+                src={`/images/products/${item.imgUrl}`}
                 alt={item.name}
                 width={63}
                 height={63}
@@ -50,7 +50,6 @@ const CartItems = ({ handlePayment }: TCartItems) => {
             <Button
               variant="ghost"
               className="w-7 h-7 p-0! self-center ml-auto"
-              onClick={() => removeItem(item._id)}
             >
               <FiTrash2 />
             </Button>
@@ -70,7 +69,7 @@ const CartItems = ({ handlePayment }: TCartItems) => {
           variant="dark"
           size="small"
           className="w-full mt-4 flex items-center justify-center gap-2"
-          onClick={handlePayment}
+          onClick={() => router.push("/payment")}
         >
           <FiCreditCard />
           Proceed to Payment
