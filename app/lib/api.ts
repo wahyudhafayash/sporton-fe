@@ -4,7 +4,7 @@ export async function fetchAPI<T>(
 ): Promise<T> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${endpoint}`, {
     ...options,
-    cache: options?.cache || "no-cache",
+    cache: options?.cache || "no-store",
   });
 
   if (!res.ok) {
@@ -18,6 +18,7 @@ export async function fetchAPI<T>(
 
     throw new Error(errorMessage);
   }
+
   return res.json();
 }
 
