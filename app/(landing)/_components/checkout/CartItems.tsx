@@ -8,7 +8,11 @@ import { useRouter } from "next/navigation";
 import { useCartStore } from "@/app/hooks/use-cart-store";
 import { getImageUrl } from "@/app/lib/api";
 
-const CartItems = () => {
+type TCartItems = {
+  handlePayment: () => void;
+};
+
+const CartItems = ({ handlePayment }: TCartItems) => {
   const router = useRouter();
   const { items, removeItem } = useCartStore();
 
@@ -66,7 +70,7 @@ const CartItems = () => {
           variant="dark"
           size="small"
           className="w-full mt-4 flex items-center justify-center gap-2"
-          onClick={() => router.push("/payment")}
+          onClick={handlePayment}
         >
           <FiCreditCard />
           Proceed to Payment
