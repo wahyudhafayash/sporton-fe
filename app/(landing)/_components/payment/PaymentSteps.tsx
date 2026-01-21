@@ -5,12 +5,58 @@ import FileUpload from "../ui/FileUpload";
 import Button from "../ui/Button";
 import { FiCheckCircle } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/app/hooks/use-cart-store";
+import { useState } from "react";
+import { transactionCheckout } from "@/app/service/transaction.service";
+import priceFormatter from "@/app/utils/price-formatter";
 
 const PaymentSteps = () => {
   const router = useRouter();
+  const { items, customerInfo, reset } = useCartStore();
+  const [file, setFile] = useState<File | null>();
 
-  const UploadAndConfirm = () => {
-    router.push("/order-status/submitted");
+  const totalPrice = items.reduce(
+    (total, item) => total + item.price * item.qty,
+    0,
+  );
+
+  const handleConfirmPayment = async () => {
+    if (!file) {
+      alert("Please upload your payment receipt!");
+      return;
+    }
+
+    if (!customerInfo) {
+      alert("Customer information is missing, please return to checkout");
+      router.push("/checkout");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("customerName", customerInfo.customerName);
+      formData.append(
+        "customerContact",
+        customerInfo.customerContact!.toString(),
+      );
+      formData.append("customerAddress", customerInfo.customerAddress);
+      formData.append("image", file);
+      formData.append(
+        "purchasedItems",
+        JSON.stringify(
+          items.map((item) => ({ productId: item._id, qty: item.qty })),
+        ),
+      );
+      formData.append("totalPayment", totalPrice!.toString());
+
+      const res = await transactionCheckout(formData);
+
+      alert("Transaction created successfully!");
+      reset();
+      router.push(`/order-status/${res._id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -32,19 +78,20 @@ const PaymentSteps = () => {
             transaction.
           </li>
         </ol>
-        <FileUpload />
+        <FileUpload onFileSelect={setFile} />
       </div>
-      <div className="border-t border-gray-200 p-4">
-        <div className="flex justify-between items-center font-semibold">
-          <div>Total</div>
-          <div className="text-primary text-sm">{priceformatter(400000)}</div>
-        </div>
 
+      <div className="border-t border-gray-200 p-4">
+        <div className="flex justify-between font-semibold">
+          <div className="text-sm">Total</div>
+          <div className="text-primary text-xs">
+            {priceFormatter(totalPrice)}
+          </div>
+        </div>
         <Button
           variant="dark"
-          size="small"
-          className="w-full mt-4 flex items-center justify-center gap-2"
-          onClick={UploadAndConfirm}
+          className="w-full mt-4"
+          onClick={handleConfirmPayment}
         >
           <FiCheckCircle />
           Upload Receipt & Confirm
