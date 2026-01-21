@@ -1,6 +1,7 @@
 import { create } from "zustand";
-import { Product } from "../types";
 import { persist } from "zustand/middleware";
+import { Product } from "../types";
+
 export interface CartItem extends Product {
   qty: number;
 }
@@ -45,12 +46,10 @@ export const useCartStore = create<CartStore>()(
         }
       },
       removeItem: (productId) => {
-        set({
-          items: get().items.filter((item) => item._id !== productId),
-        });
+        set({ items: get().items.filter((item) => item._id !== productId) });
       },
       reset: () => {
-        set({ items: [] });
+        set({ items: [], customerInfo: null });
       },
     }),
     {

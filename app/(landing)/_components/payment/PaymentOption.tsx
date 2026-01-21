@@ -1,12 +1,13 @@
-import { getAllBanks } from "@/app/service/bak.service";
+import { getAllBanks } from "@/app/service/bank.service";
 import CardWithHeader from "../ui/CardWithHeader";
 import { FiCreditCard } from "react-icons/fi";
 
 const PaymentOption = async () => {
-  const banks = await getAllBanks();
+  const bank = await getAllBanks();
+
   return (
     <CardWithHeader title="Payment Option">
-      {banks.map((payment) => (
+      {bank.map((payment) => (
         <div
           className="flex gap-5 p-5 border-b border-gray-100 "
           key={payment._id}
@@ -17,7 +18,7 @@ const PaymentOption = async () => {
           <div className="self-center">
             <div className="font-bold">{payment.bankName}</div>
             <div className="text-sm">{payment.accountNumber}</div>
-            <div className="text-sm opacity/70">{payment.accountName}</div>
+            <div className="text-sm opacity-70">{payment.accountName}</div>
           </div>
           <div className="ml-auto bg-blue-50 text-gray-800 text-xs h-fit self-center px-2 py-1">
             Bank Transfer
