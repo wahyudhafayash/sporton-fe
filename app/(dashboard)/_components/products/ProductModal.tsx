@@ -17,7 +17,7 @@ const ProductModal = ({ isOpen, onClose }: TProductModalProps) => {
       <div className="flex flex-col gap-6">
         <div className="flex gap-7">
           <div className="min-w-50">
-            <p className="text-xs pb-1">Product Image</p>
+            <h2 className="text-xs mb-2">Product Image</h2>
             <ImageUploadPreview
               label="Product Image"
               value={imagePreview}
