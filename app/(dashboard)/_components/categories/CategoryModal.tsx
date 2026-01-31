@@ -9,7 +9,7 @@ type TCategoryModalProps = {
 };
 
 const CategoryModal = ({ isOpen, onClose }: TCategoryModalProps) => {
-  const [imageFIle, setImageFile] = useState<File | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   return (
