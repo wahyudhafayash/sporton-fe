@@ -14,7 +14,7 @@ const ProductManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [productToDeleteId, setProductToDeleteid] = useState("");
+  const [productToDeleteId, setProductToDeleteId] = useState("");
 
   const fetchProducts = async () => {
     try {
@@ -33,7 +33,7 @@ const ProductManagement = () => {
   };
 
   const handleDelete = (id: string) => {
-    setProductToDeleteid(id);
+    setProductToDeleteId(id);
     setIsDeleteModalOpen(true);
   };
 
@@ -44,7 +44,7 @@ const ProductManagement = () => {
       fetchProducts();
       toast.success("Product deleted successfully!");
       setIsModalOpen(false);
-      setProductToDeleteid("");
+      setProductToDeleteId("");
     } catch (error) {
       console.log("Failed to delete product", error);
       toast.error("Failed to delete product!");
