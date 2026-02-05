@@ -478,15 +478,6 @@ pnpm install
 3. Push to branch (`git push origin feature/AmazingFeature`)
 4. Open a Pull Request
 
-## 📜 License
-
-[Tentukan license project Anda]
-
-## 👥 Author
-
-[Nama Author/Tim]
-
-## 📞 Support
 
 Untuk pertanyaan atau dukungan, silakan buat issue di repository ini.
 
